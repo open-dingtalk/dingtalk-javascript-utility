@@ -1,2 +1,3 @@
-# weex-dingtalk-util
-dingtalk 钉钉 Util集合
+# journey
+
+🔥 A modern JavaScript utility library , using in Web and Weex.
