@@ -83,6 +83,9 @@ function format(url, query) {
 
 function parse$1(url, parseQueryString) {
   var searchIndex = url.indexOf('?');
+  if (searchIndex === -1) {
+    return {};
+  }
   var searchString = url.slice(searchIndex + 1);
   var query = querystring.parse(searchString);
   if (typeof parseQueryString === 'string' && parseQueryString.length > 0) {

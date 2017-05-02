@@ -7,6 +7,9 @@ function format(url, query){
 
 function parse(url,parseQueryString){
   const searchIndex = url.indexOf('?');
+  if (searchIndex === -1){
+    return {};
+  }
   const searchString = url.slice(searchIndex + 1);
   const query = querystring.parse(searchString);
   if (typeof parseQueryString === 'string' && parseQueryString.length > 0){
