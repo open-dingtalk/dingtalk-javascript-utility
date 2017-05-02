@@ -1,9 +1,14 @@
 {
-  "name": "journey-utility",
+  "name": "weex-dingtalk-journey",
   "version": "0.0.1",
   "description": "A modern JavaScript utility library, using in Web and Weex",
-  "main": "src/index.js",
-  "scripts": {},
+  "main": "dist/journey-min.js",
+  "scripts": {
+    "es5": "node ./build/build.js build",
+    "dev": "node ./build/build.js dev --watch",
+    "build": "npm run es5 && node ./build/build.js dev",
+    "test": "node ./node_modules/mocha/bin/mocha test/**.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/icepy/journey.git"
@@ -16,6 +21,8 @@
   "homepage": "https://github.com/icepy/journey#readme",
   "devDependencies": {
     "babel-preset-es2015-rollup": "^3.0.0",
+    "chai": "^3.5.0",
+    "mocha": "^3.3.0",
     "rollup": "^0.41.6",
     "rollup-plugin-babel": "^2.7.1",
     "rollup-plugin-node-resolve": "^3.0.0",
