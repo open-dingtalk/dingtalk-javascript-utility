@@ -8,9 +8,18 @@ if (typeof weex === 'undefined'){
 }
 const env = weex.config.env;
 
-export const isiOS = env.platform === 'iOS';
-export const isAndroid = env.platform === 'Android';
-export const isDingtalk = env.appName === 'DingTalk';
-export const isWeexWeb = env.platform === 'Web';
-export const isWeexNative = isiOS || isAndroid;
-export const isWeb = env.platform === 'NOTWeexNative&&WeexWeb';
+const isiOS = env.platform === 'iOS';
+const isAndroid = env.platform === 'Android';
+const isDingtalk = env.appName === 'DingTalk';
+const isWeexWeb = env.platform === 'Web';
+const isWeexNative = isiOS || isAndroid;
+const isWeb = env.platform === 'NOTWeexNative&&WeexWeb';
+
+export default {
+  isiOS,
+  isAndroid,
+  isDingtalk,
+  isWeexWeb,
+  isWeexNative,
+  isWeb
+};

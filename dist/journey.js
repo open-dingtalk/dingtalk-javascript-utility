@@ -97,9 +97,36 @@ var URL = {
   parse: parse$1
 };
 
+if (typeof weex === 'undefined') {
+  /*不是weex环境（包括weex下的Web）构建一个假的weex对象做欺骗*/
+  window.weex = {};
+  weex.config = {};
+  weex.config.env = {};
+  var _env = weex.config.env;
+  _env.platform = 'NOTWeexNative&&WeexWeb';
+}
+var env = weex.config.env;
+
+var isiOS = env.platform === 'iOS';
+var isAndroid = env.platform === 'Android';
+var isDingtalk = env.appName === 'DingTalk';
+var isWeexWeb = env.platform === 'Web';
+var isWeexNative = isiOS || isAndroid;
+var isWeb = env.platform === 'NOTWeexNative&&WeexWeb';
+
+var env$1 = {
+  isiOS: isiOS,
+  isAndroid: isAndroid,
+  isDingtalk: isDingtalk,
+  isWeexWeb: isWeexWeb,
+  isWeexNative: isWeexNative,
+  isWeb: isWeb
+};
+
 var index = {
   querystring: querystring,
-  URL: URL
+  URL: URL,
+  env: env$1
 };
 
 module.exports = index;

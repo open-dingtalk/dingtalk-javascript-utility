@@ -2,13 +2,13 @@
 
 🔥 A modern JavaScript utility library , using in Web and Weex.
 
-### 安装
+## 安装
 
 ```bash
 npm install weex-dingtalk-journey --save
 ```
 
-### 使用示例
+## 使用示例
 
 ```JavaScript
 import journey from 'weex-dingtalk-journey';
@@ -20,11 +20,11 @@ const query = querystring.parse('name=icepy&github=icepy');
 console.log(query);
 ```
 
-### Apis 示例
+## Apis 示例
 
 Apis示例，如果例子不详细可以 `npm run test` 跑一下单元测试，查看每一个函数的最终效果。
 
-#### querystring
+### querystring
 
 **parse(qs, sep, eq)**
 
@@ -54,7 +54,7 @@ querystring.stringify( {name:'icepy',github:'icepy'});
 //name=icepy&github=icepy
 ```
 
-#### URL
+### URL
 
 > 注意 ⚠️ URL目前只能处理query
 
@@ -86,7 +86,7 @@ var val = URL.parse('https://github.com/icepy?name=alibaba-dingtalk','name');
 // alibaba-dingtalk
 ```
 
-#### env
+### env
 
 - isiOS：判断是否为iOS环境
 - isAndroid：判断是否为Android环境
