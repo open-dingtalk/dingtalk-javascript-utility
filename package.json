@@ -1,6 +1,6 @@
 {
   "name": "weex-dingtalk-journey",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A modern JavaScript utility library, using in Web and Weex",
   "main": "dist/journey-min.js",
   "scripts": {
