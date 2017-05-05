@@ -1,4 +1,4 @@
-import querystring from '../querystring/index.js';
+import querystring from 'querystring';
 
 function format(url, query){
   let search = querystring.stringify(query);

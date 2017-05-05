@@ -5,6 +5,8 @@ var babel = require('rollup-plugin-babel');
 var resolve = require('rollup-plugin-node-resolve');
 var uglify = require('rollup-plugin-uglify');
 var watch = require('rollup-watch');
+var alias = require('rollup-plugin-alias');
+var configAlias = require('./alias.js');
 
 var isWatch = false;
 if (process.argv[3]) {
@@ -19,6 +21,7 @@ function build(name){
   let config = {
     entry: './src/index.js',
     plugins: [
+      alias(configAlias),
       resolve(),
       babel()
     ],

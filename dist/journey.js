@@ -97,22 +97,33 @@ var URL = {
   parse: parse$1
 };
 
-if (typeof weex === 'undefined') {
-  /*不是weex环境（包括weex下的Web）构建一个假的weex对象做欺骗*/
-  window.weex = {};
-  weex.config = {};
-  weex.config.env = {};
-  var _env = weex.config.env;
-  _env.platform = 'NOTWeexNative&&WeexWeb';
+function whatEnv() {
+  var weexEnv = {};
+  if (typeof weex !== 'undefined') {
+    weexEnv.platform = weex.config.env.platform;
+    weexEnv.bundleFrameworkType = 'Vue';
+    weexEnv.appName = weex.config.env.appName;
+  } else {
+    // Rax Weex
+    if (typeof callNative === 'function') {
+      weexEnv.platform = navigator.platform;
+      weexEnv.appName = navigator.appName;
+    } else {
+      // Rax Web
+      weexEnv.platform = 'Web';
+    }
+    weexEnv.bundleFrameworkType = 'Rax';
+  }
+  return weexEnv;
 }
-var env = weex.config.env;
 
+var env = whatEnv();
 var isiOS = env.platform === 'iOS';
 var isAndroid = env.platform === 'Android';
 var isDingtalk = env.appName === 'DingTalk';
 var isWeexWeb = env.platform === 'Web';
 var isWeexNative = isiOS || isAndroid;
-var isWeb = env.platform === 'NOTWeexNative&&WeexWeb';
+var bundleFrameworkType = env.bundleFrameworkType;
 
 var env$1 = {
   isiOS: isiOS,
@@ -120,7 +131,7 @@ var env$1 = {
   isDingtalk: isDingtalk,
   isWeexWeb: isWeexWeb,
   isWeexNative: isWeexNative,
-  isWeb: isWeb
+  bundleFrameworkType: bundleFrameworkType
 };
 
 var index = {

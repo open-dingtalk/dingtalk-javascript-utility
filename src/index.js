@@ -1,6 +1,6 @@
-import querystring from './apis/querystring/index.js';
-import URL from './apis/url/index.js';
-import env from './apis/env/index.js';
+import querystring from 'querystring';
+import URL from 'url';
+import env from 'env';
 
 export default {
   querystring,
