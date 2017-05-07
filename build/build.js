@@ -6,6 +6,7 @@ var resolve = require('rollup-plugin-node-resolve');
 var uglify = require('rollup-plugin-uglify');
 var watch = require('rollup-watch');
 var alias = require('rollup-plugin-alias');
+var commonjs = require('rollup-plugin-commonjs');
 var configAlias = require('./alias.js');
 
 var isWatch = false;
@@ -23,6 +24,7 @@ function build(name){
     plugins: [
       alias(configAlias),
       resolve(),
+      commonjs(),
       babel()
     ],
     dest:'./dist/journey.js',

@@ -5,7 +5,12 @@ function absolute (str) {
 }
 
 module.exports = {
-  "querystring": absolute("package/querystring/index.js"),
-  "url": absolute("package/URL/index.js"),
-  "env": absolute("package/env/index.js")
+  "dingtalk-querystring": absolute("package/dingtalk-querystring/index.js"),
+  "dingtalk-url": absolute("package/dingtalk-url/index.js"),
+  "dingtalk-env": absolute("package/dingtalk-env/index.js"),
+  "dingtalk-version": absolute("package/dingtalk-version/index.js"),
+  "dingtalk-apisync": absolute("package/dingtalk-apisync/index.js"),
+  "dingtalk-timer": absolute("package/dingtalk-timer/index.js"),
+  "dingtalk-require": absolute("package/dingtalk-require/index.js"),
+  "dingtalk-document": absolute("package/dingtalk-document/index.js")
 };

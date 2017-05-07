@@ -1,0 +1,73 @@
+import dingtalk from 'weex-dingtalk';
+import env from 'dingtalk-env';
+import timer from 'dingtalk-timer';
+
+const { setTimeout, clearTimeout } = timer;
+
+function apisync(){
+  let timeoutStatu = false;
+  let apis = null;
+  let container = Object.create(null);
+  dingtalk.ready(function(){
+    apis = dingtalk.apis;
+  });
+  let timeout = setTimeout(function(){
+    timeoutStatu = true;
+    clearTimeout(timeout);
+  },5000);
+  while(true){
+    if (timeoutStatu){
+      throw new Error('sync apis timeout 5000ms');
+      break;
+    }
+    if (apis){
+      clearTimeout(timeout);
+      break;
+    }
+  }
+  if (!timeoutStatu && apis){
+    container = reloadApis(apis);
+  }
+  return container;
+}
+
+function reloadApis(apis){
+  let container = Object.create(null);
+  for (let spaceName in apis){
+    let api = apis[spaceName];
+    if (typeof api === 'function'){
+      container[spaceName] = api;
+    }
+    if (typeof api === 'object' && api !== null){
+      container[spaceName] = recursiveApis(spaceName,api,Object.create(null));
+    }
+  }
+  return container;
+}
+
+function recursiveApis(spaceName,api,c){
+  let node = Object.keys(api);
+  let i = 0;
+  let j = node.length;
+  for(;i<j;i++){
+    let apiName = node[i];
+    if (typeof api[apiName] === 'function'){
+      c[apiName] = function(conf){
+        dingtalk.ready(function(){
+          const dd = dd.apis;
+          dd[spaceName][apiName](conf);
+        });
+      }
+      return c;
+    }
+    if (typeof api[apiName] === 'object' && api[apiName] !== null){
+      c[apiName] = recursiveApis(spaceName, api[apiName],Object.create(null));
+    }
+  }
+  return c;
+}
+
+export default function dingtalkApiSync(){
+  const apis = apisync();
+  return apis;
+}

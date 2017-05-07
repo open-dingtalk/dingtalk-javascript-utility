@@ -1,9 +1,19 @@
-import querystring from 'querystring';
-import URL from 'url';
-import env from 'env';
+import querystring from 'dingtalk-querystring';
+import url from 'dingtalk-url';
+import env from 'dingtalk-env';
+import compareVersion from 'dingtalk-version';
+import requireModule from 'dingtalk-require';
+import document from 'dingtalk-document';
+import timer from 'dingtalk-timer';
+import apisync from 'dingtalk-apisync';
 
 export default {
   querystring,
-  URL,
-  env
+  url,
+  env,
+  compareVersion,
+  requireModule,
+  document,
+  timer,
+  apisync
 };

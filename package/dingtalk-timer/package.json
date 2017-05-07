@@ -1,0 +1,17 @@
+{
+  "name": "dingtalk-timer",
+  "version": "0.0.2",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "icepy",
+  "license": "MIT",
+  "dependencies": {
+    "dingtalk-document": "0.0.2",
+    "dingtalk-env": "0.0.1",
+    "dingtalk-require": "0.0.1"
+  }
+}
