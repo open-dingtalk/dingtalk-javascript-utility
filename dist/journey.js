@@ -87,6 +87,9 @@ function format(url, query) {
 
 function parse$1(url, parseQueryString) {
   var searchIndex = url.indexOf('?');
+  if (searchIndex === -1) {
+    return null;
+  }
   var searchString = url.slice(searchIndex + 1);
   var query = querystring.parse(searchString);
   if (typeof parseQueryString === 'string' && parseQueryString.length > 0) {
@@ -157,7 +160,7 @@ var env = whatEnv();
 var isiOS = env.platform === 'iOS';
 var isAndroid = env.platform === 'Android';
 var isWeb = env.platform === 'Web';
-var isWeex$1 = isiOS || isAndroid;
+var isWeex = isiOS || isAndroid;
 var dingtalk = env.dingtalk;
 var bundleFrameworkType = env.bundleFrameworkType;
 var bundleUrl = dingtalk.bundleUrl;
@@ -166,7 +169,7 @@ var originalUrl = dingtalk.originalUrl;
 var isDingtalk = dingtalkContainer();
 
 function dingtalkContainer() {
-  if (isWeex$1) {
+  if (isWeex) {
     return env.appName === 'DingTalk';
   } else {
     return (/DingTalk/.test(navigator.userAgent)
@@ -179,7 +182,7 @@ var env$1 = {
   isAndroid: isAndroid,
   isDingtalk: isDingtalk,
   isWeb: isWeb,
-  isWeex: isWeex$1,
+  isWeex: isWeex,
   bundleFrameworkType: bundleFrameworkType,
   bundleUrl: bundleUrl,
   originalUrl: originalUrl
@@ -218,10 +221,11 @@ function requireModule(name) {
 }
 
 var bundleFrameworkType$2 = env$1.bundleFrameworkType;
+var isWeex$1 = env$1.isWeex;
 
 
 function Document() {
-  if (bundleFrameworkType$2 === 'Vue') {
+  if (isWeex$1 && bundleFrameworkType$2 === 'Vue') {
     return weex.document;
   } else {
     return document;
@@ -231,9 +235,11 @@ function Document() {
 var doc = Document();
 
 var timer = requireModule('timer');
+var isWeex$2 = env$1.isWeex;
+
 
 function setTimeout(handler, time) {
-  if (isWeex) {
+  if (isWeex$2) {
     timer.setTimeout(handler, time);
     return doc.taskCenter.callbackManager.lastCallbackId.toString();
   } else {
@@ -242,7 +248,7 @@ function setTimeout(handler, time) {
 }
 
 function clearTimeout(n) {
-  if (isWeex) {
+  if (isWeex$2) {
     timer.clearTimeout(n);
   } else {
     window.clearTimeout(n);
@@ -250,7 +256,7 @@ function clearTimeout(n) {
 }
 
 function setInterval(handler, time) {
-  if (isWeex) {
+  if (isWeex$2) {
     timer.setInterval(handler, time);
     return doc.taskCenter.callbackManager.lastCallbackId.toString();
   } else {
@@ -259,7 +265,7 @@ function setInterval(handler, time) {
 }
 
 function clearInterva(n) {
-  if (isWeex) {
+  if (isWeex$2) {
     timer.clearInterva(n);
   } else {
     window.clearInterva(n);
@@ -533,7 +539,7 @@ function reloadApis(apis) {
   return container;
 }
 
-function recursiveApis(spaceName, api, c) {
+function recursiveApis(spaceName, api, c, action) {
   var node = Object.keys(api);
   var i = 0;
   var j = node.length;
@@ -543,23 +549,21 @@ function recursiveApis(spaceName, api, c) {
     if (typeof api[apiName] === 'function') {
       c[apiName] = function (conf) {
         weexDingtalkMin.ready(function () {
-          var dd = dd.apis;
-          dd[spaceName][apiName](conf);
+          var dd = weexDingtalkMin.apis;
+          dd[spaceName][action][apiName](conf);
         });
       };
-      return {
-        v: c
-      };
+      return 'continue';
     }
     if (_typeof(api[apiName]) === 'object' && api[apiName] !== null) {
-      c[apiName] = recursiveApis(spaceName, api[apiName], Object.create(null));
+      c[apiName] = recursiveApis(spaceName, api[apiName], Object.create(null), apiName);
     }
   };
 
   for (; i < j; i++) {
     var _ret = _loop();
 
-    if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+    if (_ret === 'continue') continue;
   }
   return c;
 }

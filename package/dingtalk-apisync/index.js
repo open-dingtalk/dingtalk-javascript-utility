@@ -45,7 +45,7 @@ function reloadApis(apis){
   return container;
 }
 
-function recursiveApis(spaceName,api,c){
+function recursiveApis(spaceName,api,c,action){
   let node = Object.keys(api);
   let i = 0;
   let j = node.length;
@@ -54,14 +54,14 @@ function recursiveApis(spaceName,api,c){
     if (typeof api[apiName] === 'function'){
       c[apiName] = function(conf){
         dingtalk.ready(function(){
-          const dd = dd.apis;
-          dd[spaceName][apiName](conf);
+          const dd = dingtalk.apis;
+          dd[spaceName][action][apiName](conf);
         });
       }
-      return c;
+      continue;
     }
     if (typeof api[apiName] === 'object' && api[apiName] !== null){
-      c[apiName] = recursiveApis(spaceName, api[apiName],Object.create(null));
+      c[apiName] = recursiveApis(spaceName, api[apiName],Object.create(null),apiName);
     }
   }
   return c;
