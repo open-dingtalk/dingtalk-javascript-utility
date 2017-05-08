@@ -5,7 +5,6 @@ import compareVersion from 'dingtalk-version';
 import requireModule from 'dingtalk-require';
 import document from 'dingtalk-document';
 import timer from 'dingtalk-timer';
-import apisync from 'dingtalk-apisync';
 
 export default {
   querystring,
@@ -14,6 +13,5 @@ export default {
   compareVersion,
   requireModule,
   document,
-  timer,
-  apisync
+  timer
 };
