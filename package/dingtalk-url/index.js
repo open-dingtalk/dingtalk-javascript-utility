@@ -1,4 +1,4 @@
-import querystring from '../querystring/index.js';
+import querystring from 'dingtalk-querystring';
 
 function format(url, query){
   let search = querystring.stringify(query);
@@ -8,7 +8,7 @@ function format(url, query){
 function parse(url,parseQueryString){
   const searchIndex = url.indexOf('?');
   if (searchIndex === -1){
-    return {};
+    return null;
   }
   const searchString = url.slice(searchIndex + 1);
   const query = querystring.parse(searchString);

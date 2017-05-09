@@ -1,6 +1,10 @@
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
+  return typeof obj;
+} : function (obj) {
+  return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+};
 
 function parse(qs, sep, eq) {
   var obj = Object.create(null);
@@ -84,7 +88,7 @@ function format(url, query) {
 function parse$1(url, parseQueryString) {
   var searchIndex = url.indexOf('?');
   if (searchIndex === -1) {
-    return {};
+    return null;
   }
   var searchString = url.slice(searchIndex + 1);
   var query = querystring.parse(searchString);
@@ -95,41 +99,194 @@ function parse$1(url, parseQueryString) {
   }
 }
 
-var URL = {
+var url = {
   format: format,
   parse: parse$1
 };
 
-if (typeof weex === 'undefined') {
-  /*不是weex环境（包括weex下的Web）构建一个假的weex对象做欺骗*/
-  window.weex = {};
-  weex.config = {};
-  weex.config.env = {};
-  var _env = weex.config.env;
-  _env.platform = 'NOTWeexNative&&WeexWeb';
+function whatEnv() {
+  /*
+    env Object ======= !!!!
+     platform,
+    bundleFrameworkType,
+    dingtalk {
+     bundleUrl,
+     originalUrl
+    }
+    appName
+    */
+  var weexEnv = {};
+  if (typeof weex !== 'undefined') {
+    var config = weex.config;
+    var _env = config.env;
+    weexEnv.platform = _env.platform;
+    weexEnv.bundleFrameworkType = 'Vue';
+    if (weexEnv.platform !== 'Web') {
+      weexEnv.dingtalk = {
+        bundleUrl: config.bundleUrl,
+        originalUrl: config.originalUrl
+      };
+      weexEnv.appName = _env.appName;
+    } else {
+      // Vue Web
+      var href = location.href;
+      var tpl = url.parse(href, 'dd_wx_tpl');
+      weexEnv.dingtalk = {
+        bundleUrl: tpl ? tpl : url.parse(href, '_wx_tpl'),
+        originalUrl: href
+      };
+    }
+  } else {
+    // Rax Weex
+    if (typeof callNative === 'function') {
+      weexEnv.platform = navigator.platform;
+      weexEnv.appName = navigator.appName;
+    } else {
+      // Rax Web
+      weexEnv.platform = 'Web';
+      var _href = location.href;
+      var _tpl = url.parse(_href, 'dd_wx_tpl');
+      weexEnv.dingtalk = {
+        bundleUrl: _tpl ? _tpl : url.parse(_href, '_wx_tpl'),
+        originalUrl: _href
+      };
+    }
+    weexEnv.bundleFrameworkType = 'Rax';
+  }
+  return weexEnv;
 }
-var env = weex.config.env;
 
+var env = whatEnv();
 var isiOS = env.platform === 'iOS';
 var isAndroid = env.platform === 'Android';
-var isDingtalk = env.appName === 'DingTalk';
-var isWeexWeb = env.platform === 'Web';
-var isWeexNative = isiOS || isAndroid;
-var isWeb = env.platform === 'NOTWeexNative&&WeexWeb';
+var isWeb = env.platform === 'Web';
+var isWeex = isiOS || isAndroid;
+var dingtalk = env.dingtalk;
+var bundleFrameworkType = env.bundleFrameworkType;
+var bundleUrl = dingtalk.bundleUrl;
+var originalUrl = dingtalk.originalUrl;
+
+var isDingtalk = dingtalkContainer();
+
+function dingtalkContainer() {
+  if (isWeex) {
+    return env.appName === 'DingTalk';
+  } else {
+    return (/DingTalk/.test(navigator.userAgent)
+    );
+  }
+}
 
 var env$1 = {
   isiOS: isiOS,
   isAndroid: isAndroid,
   isDingtalk: isDingtalk,
-  isWeexWeb: isWeexWeb,
-  isWeexNative: isWeexNative,
-  isWeb: isWeb
+  isWeb: isWeb,
+  isWeex: isWeex,
+  bundleFrameworkType: bundleFrameworkType,
+  bundleUrl: bundleUrl,
+  originalUrl: originalUrl
+};
+
+function compareVersion(oldVersion, newVersion, containEqual) {
+  if (typeof oldVersion !== 'string' || typeof newVersion !== 'string') {
+    return false;
+  }
+  //分割字符串为['1', '0', '1']格式
+  var oldArray = oldVersion.split('.');
+  var newArray = newVersion.split('.');
+  var o = void 0;
+  var n = void 0;
+  do {
+    o = oldArray.shift();
+    n = newArray.shift();
+  } while (o === n && newArray.length > 0);
+  if (containEqual) {
+    return (n | 0) >= (o | 0);
+  } else {
+    return (n | 0) > (o | 0);
+  }
+}
+
+var bundleFrameworkType$1 = env$1.bundleFrameworkType;
+
+
+function requireModule(name) {
+  if (bundleFrameworkType$1 === 'Vue') {
+    return weex.requireModule(name);
+  } else {
+    var moduleName = '@weex-module/' + name;
+    return __weex_require__(moduleName);
+  }
+}
+
+var bundleFrameworkType$2 = env$1.bundleFrameworkType;
+var isWeex$1 = env$1.isWeex;
+
+
+function Document() {
+  if (isWeex$1 && bundleFrameworkType$2 === 'Vue') {
+    return weex.document;
+  } else {
+    return document;
+  }
+}
+
+var doc = Document();
+
+var timer = requireModule('timer');
+var isWeex$2 = env$1.isWeex;
+
+
+function setTimeout(handler, time) {
+  if (isWeex$2) {
+    timer.setTimeout(handler, time);
+    return doc.taskCenter.callbackManager.lastCallbackId.toString();
+  } else {
+    return window.setTimeout(handler, time);
+  }
+}
+
+function clearTimeout(n) {
+  if (isWeex$2) {
+    timer.clearTimeout(n);
+  } else {
+    window.clearTimeout(n);
+  }
+}
+
+function setInterval(handler, time) {
+  if (isWeex$2) {
+    timer.setInterval(handler, time);
+    return doc.taskCenter.callbackManager.lastCallbackId.toString();
+  } else {
+    return window.setInterval(handler, time);
+  }
+}
+
+function clearInterva(n) {
+  if (isWeex$2) {
+    timer.clearInterva(n);
+  } else {
+    window.clearInterva(n);
+  }
+}
+
+var timer$1 = {
+  setTimeout: setTimeout,
+  clearTimeout: clearTimeout,
+  setInterval: setInterval,
+  clearInterva: clearInterva
 };
 
 var index = {
   querystring: querystring,
-  URL: URL,
-  env: env$1
+  url: url,
+  env: env$1,
+  compareVersion: compareVersion,
+  requireModule: requireModule,
+  document: doc,
+  timer: timer$1
 };
 
 module.exports = index;
