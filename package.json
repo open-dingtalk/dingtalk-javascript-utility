@@ -1,6 +1,6 @@
 {
   "name": "weex-dingtalk-journey",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A modern JavaScript utility library, using in Web and Weex",
   "main": "src/index.js",
   "scripts": {
@@ -35,6 +35,6 @@
     "rollup-watch": "^3.2.2"
   },
   "dependencies": {
-    "weex-dingtalk": "^0.1.0"
+    "weex-dingtalk": "^0.1.1"
   }
 }
