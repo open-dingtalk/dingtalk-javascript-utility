@@ -55,28 +55,53 @@ function whatEnv(){
 }
 
 const env = whatEnv();
-const isiOS = env.platform === 'iOS';
-const isAndroid = env.platform === 'Android';
 const isWeb = env.platform === 'Web';
-const isWeex = isiOS || isAndroid;
+const isWeexiOS = env.platform === 'iOS';
+const isWeexAndroid = env.platform === 'Android';
+const isWeex = isWeexiOS || isWeexAndroid;
 const { dingtalk, bundleFrameworkType } = env;
 const { bundleUrl, originalUrl } = dingtalk;
+
+let UA;
+if(isWeb){
+  UA = window.navigator.userAgent.toLowerCase();
+}
+
 const isDingtalk = dingtalkContainer();
 
 function dingtalkContainer(){
   if (isWeex){
     return env.appName === 'DingTalk';
   } else {
-    return /DingTalk/.test(navigator.userAgent)
+    return UA && UA.indexOf('dingtalk') > -1;
   }
 }
 
+function webAndroid(){
+  if (isWeb){
+    return UA && UA.indexOf('android') > -1;
+  }
+  return null;
+}
+
+function webiOS(){
+  if (isWeb){
+    return UA && /iphone|ipad|ipod|ios/.test(UA);
+  }
+  return null;
+}
+
+const isWebiOS = webiOS();
+const isWebAndroid = webAndroid();
+
 export default {
-  isiOS,
-  isAndroid,
   isDingtalk,
   isWeb,
+  isWebiOS,
+  isWebAndroid,
   isWeex,
+  isWeexiOS,
+  isWeexAndroid,
   bundleFrameworkType,
   bundleUrl,
   originalUrl

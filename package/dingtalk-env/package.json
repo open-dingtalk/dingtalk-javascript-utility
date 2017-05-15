@@ -1,6 +1,6 @@
 {
   "name": "dingtalk-env",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -10,6 +10,6 @@
   "author": "icepy",
   "license": "MIT",
   "dependencies": {
-    "dingtalk-url": "^0.0.1"
+    "dingtalk-url": "^0.0.2"
   }
 }

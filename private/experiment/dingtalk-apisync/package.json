@@ -1,0 +1,16 @@
+{
+  "name": "dingtalk-apisync",
+  "version": "0.0.4",
+  "description": "dingtalk sdk sync",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "icepy",
+  "license": "MIT",
+  "dependencies": {
+    "dingtalk-env": "0.0.2",
+    "dingtalk-timer": "0.0.3",
+    "weex-dingtalk": "^0.1.1"
+  }
+}
