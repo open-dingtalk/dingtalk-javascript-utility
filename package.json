@@ -1,8 +1,8 @@
 {
   "name": "weex-dingtalk-journey",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "A modern JavaScript utility library, using in Web and Weex",
-  "main": "src/index.js",
+  "main": "dist/journey.js",
   "scripts": {
     "es5": "node ./build/build.js build",
     "dev": "node ./build/build.js dev --watch",
