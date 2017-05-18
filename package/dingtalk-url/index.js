@@ -6,11 +6,22 @@ function format(url, query){
 }
 
 function parse(url,parseQueryString){
+  let location = {
+    hash: null,
+    search: null
+  };
+  const hashIndex = url.indexOf('#');
   const searchIndex = url.indexOf('?');
   if (searchIndex === -1){
     return null;
   }
-  const searchString = url.slice(searchIndex + 1);
+  if (hashIndex > -1){
+    location.hash = url.slice(hashIndex);
+    location.search = url.slice(searchIndex, hashIndex);
+  } else {
+    location.search = url.slice(searchIndex);
+  }
+  const searchString = location.search(1);
   const query = querystring.parse(searchString);
   if (typeof parseQueryString === 'string' && parseQueryString.length > 0){
     return query[parseQueryString];

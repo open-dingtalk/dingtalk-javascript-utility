@@ -19,7 +19,23 @@ function parse(qs, sep, eq) {
   for (; i < l; i++) {
     var items = params[i].split(eq);
     var queryKey = items[0].trim();
-    var queryVal = items[1].trim();
+    var queryVal = '';
+    if (items.length >= 3) {
+      (function () {
+        items.splice(0, 1);
+        var lastIndex = items.length - 1;
+        items.forEach(function (v, i) {
+          v = v.trim();
+          if (i === lastIndex) {
+            queryVal += v;
+          } else {
+            queryVal += v + eq;
+          }
+        });
+      })();
+    } else {
+      queryVal = items[1].trim();
+    }
     var cur = obj[queryKey];
     if (cur) {
       if (Array.isArray(cur)) {
@@ -86,11 +102,22 @@ function format(url, query) {
 }
 
 function parse$1(url, parseQueryString) {
+  var location = {
+    hash: null,
+    search: null
+  };
+  var hashIndex = url.indexOf('#');
   var searchIndex = url.indexOf('?');
   if (searchIndex === -1) {
     return null;
   }
-  var searchString = url.slice(searchIndex + 1);
+  if (hashIndex > -1) {
+    location.hash = url.slice(hashIndex);
+    location.search = url.slice(searchIndex, hashIndex);
+  } else {
+    location.search = url.slice(searchIndex);
+  }
+  var searchString = location.search(1);
   var query = querystring.parse(searchString);
   if (typeof parseQueryString === 'string' && parseQueryString.length > 0) {
     return query[parseQueryString];

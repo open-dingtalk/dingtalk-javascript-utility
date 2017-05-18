@@ -12,7 +12,21 @@ function parse(qs, sep, eq){
   for(;i<l;i++){
     let items = params[i].split(eq);
     let queryKey = items[0].trim();
-    let queryVal = items[1].trim();
+    let queryVal = '';
+    if (items.length >= 3){
+      items.splice(0,1);
+      let lastIndex = items.length - 1;
+      items.forEach(function(v,i){
+        v = v.trim();
+        if (i === lastIndex){
+          queryVal += v;
+        } else {
+          queryVal += v + eq
+        }
+      });
+    } else {
+      queryVal = items[1].trim();
+    }
     let cur = obj[queryKey];
     if (cur){
       if (Array.isArray(cur)){
