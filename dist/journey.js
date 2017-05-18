@@ -106,11 +106,14 @@ function parse$1(url, parseQueryString) {
     hash: null,
     search: null
   };
-  var hashIndex = url.indexOf('#');
+  if (!url) {
+    return {};
+  }
   var searchIndex = url.indexOf('?');
   if (searchIndex === -1) {
-    return null;
+    return {};
   }
+  var hashIndex = url.indexOf('#');
   if (hashIndex > -1) {
     location.hash = url.slice(hashIndex);
     location.search = url.slice(searchIndex, hashIndex);
@@ -186,7 +189,7 @@ function whatEnv() {
 var env = whatEnv();
 var isWeb = env.platform === 'Web';
 var isWeexiOS = env.platform === 'iOS';
-var isWeexAndroid = env.platform === 'Android';
+var isWeexAndroid = env.platform === 'android';
 var isWeex = isWeexiOS || isWeexAndroid;
 var dingtalk = env.dingtalk;
 var bundleFrameworkType = env.bundleFrameworkType;
@@ -203,7 +206,10 @@ var isDingtalk = dingtalkContainer();
 
 function dingtalkContainer() {
   if (isWeex) {
-    return env.appName === 'DingTalk';
+    if (env.appName === 'DingTalk' || env.appName === 'com.alibaba.android.rimet') {
+      return true;
+    }
+    return false;
   } else {
     return UA && UA.indexOf('dingtalk') > -1;
   }

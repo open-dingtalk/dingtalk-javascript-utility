@@ -57,7 +57,7 @@ function whatEnv(){
 const env = whatEnv();
 const isWeb = env.platform === 'Web';
 const isWeexiOS = env.platform === 'iOS';
-const isWeexAndroid = env.platform === 'Android';
+const isWeexAndroid = env.platform === 'android';
 const isWeex = isWeexiOS || isWeexAndroid;
 const { dingtalk, bundleFrameworkType } = env;
 const { bundleUrl, originalUrl } = dingtalk;
@@ -71,7 +71,10 @@ const isDingtalk = dingtalkContainer();
 
 function dingtalkContainer(){
   if (isWeex){
-    return env.appName === 'DingTalk';
+    if (env.appName === 'DingTalk' || env.appName === 'com.alibaba.android.rimet'){
+      return true;
+    }
+    return false;
   } else {
     return UA && UA.indexOf('dingtalk') > -1;
   }

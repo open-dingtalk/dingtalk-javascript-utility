@@ -10,11 +10,14 @@ function parse(url,parseQueryString){
     hash: null,
     search: null
   };
-  const hashIndex = url.indexOf('#');
+  if (!url){
+    return {};
+  }
   const searchIndex = url.indexOf('?');
   if (searchIndex === -1){
-    return null;
+    return {};
   }
+  const hashIndex = url.indexOf('#');
   if (hashIndex > -1){
     location.hash = url.slice(hashIndex);
     location.search = url.slice(searchIndex, hashIndex);
