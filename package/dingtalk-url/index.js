@@ -21,7 +21,7 @@ function parse(url,parseQueryString){
   } else {
     location.search = url.slice(searchIndex);
   }
-  const searchString = location.search(1);
+  const searchString = location.search.slice(1);
   const query = querystring.parse(searchString);
   if (typeof parseQueryString === 'string' && parseQueryString.length > 0){
     return query[parseQueryString];

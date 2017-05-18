@@ -117,7 +117,7 @@ function parse$1(url, parseQueryString) {
   } else {
     location.search = url.slice(searchIndex);
   }
-  var searchString = location.search(1);
+  var searchString = location.search.slice(1);
   var query = querystring.parse(searchString);
   if (typeof parseQueryString === 'string' && parseQueryString.length > 0) {
     return query[parseQueryString];
