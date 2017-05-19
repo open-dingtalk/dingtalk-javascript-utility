@@ -1,6 +1,6 @@
 {
   "name": "dingtalk-timer",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -10,8 +10,8 @@
   "author": "icepy",
   "license": "MIT",
   "dependencies": {
-    "dingtalk-document": "0.0.3",
-    "dingtalk-env": "0.0.1",
-    "dingtalk-require": "0.0.1"
+    "dingtalk-document": "^0.0.4",
+    "dingtalk-env": "^0.0.4",
+    "dingtalk-require": "^0.0.3"
   }
 }

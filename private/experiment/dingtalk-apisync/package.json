@@ -1,6 +1,6 @@
 {
   "name": "dingtalk-apisync",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "dingtalk sdk sync",
   "main": "index.js",
   "scripts": {
@@ -9,8 +9,7 @@
   "author": "icepy",
   "license": "MIT",
   "dependencies": {
-    "dingtalk-env": "0.0.2",
-    "dingtalk-timer": "0.0.3",
+    "dingtalk-timer": "^0.0.4",
     "weex-dingtalk": "^0.1.1"
   }
 }
