@@ -233,9 +233,9 @@ function webiOS() {
 
 function fetchVersion() {
   if (isWeb) {
-    var matches = UA.match(/AliApp\(\w+\/([a-zA-Z0-9.-]+)\)/);
+    var matches = UA.match(/aliapp\(\w+\/([a-zA-Z0-9.-]+)\)/);
     if (matches === null) {
-      matches = UA.match(/DingTalk\/([a-zA-Z0-9.-]+)/);
+      matches = UA.match(/dingtalk\/([a-zA-Z0-9.-]+)/);
     }
     var _version = matches && matches[1];
     return _version;

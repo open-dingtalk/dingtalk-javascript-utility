@@ -98,9 +98,9 @@ function webiOS(){
 
 function fetchVersion(){
   if (isWeb){
-    let matches = UA.match(/AliApp\(\w+\/([a-zA-Z0-9.-]+)\)/);
+    let matches = UA.match(/aliapp\(\w+\/([a-zA-Z0-9.-]+)\)/);
     if (matches === null) {
-        matches = UA.match(/DingTalk\/([a-zA-Z0-9.-]+)/);
+        matches = UA.match(/dingtalk\/([a-zA-Z0-9.-]+)/);
     }
     let version = matches && matches[1];
     return version;
