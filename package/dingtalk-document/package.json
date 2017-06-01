@@ -1,7 +1,7 @@
 {
   "name": "dingtalk-document",
-  "version": "0.0.4",
-  "description": "",
+  "version": "0.0.5",
+  "description": "weex and web document",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,6 +10,6 @@
   "author": "icepy",
   "license": "MIT",
   "dependencies": {
-    "dingtalk-env": "^0.0.4"
+    "dingtalk-env": "^0.0.5"
   }
 }

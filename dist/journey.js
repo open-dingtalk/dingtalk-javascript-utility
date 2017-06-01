@@ -156,6 +156,7 @@ function whatEnv() {
         bundleUrl: config.bundleUrl,
         originalUrl: config.originalUrl
       };
+      weexEnv.appVersion = _env.appVersion;
       weexEnv.appName = _env.appName;
     } else {
       // Vue Web
@@ -171,6 +172,7 @@ function whatEnv() {
     if (typeof callNative === 'function') {
       weexEnv.platform = navigator.platform;
       weexEnv.appName = navigator.appName;
+      weexEnv.appVersion = navigator.appVersion;
     } else {
       // Rax Web
       weexEnv.platform = 'Web';
@@ -229,8 +231,22 @@ function webiOS() {
   return null;
 }
 
+function fetchVersion() {
+  if (isWeb) {
+    var matches = UA.match(/AliApp\(\w+\/([a-zA-Z0-9.-]+)\)/);
+    if (matches === null) {
+      matches = UA.match(/DingTalk\/([a-zA-Z0-9.-]+)/);
+    }
+    var _version = matches && matches[1];
+    return _version;
+  } else {
+    return env.appVersion;
+  }
+}
+
 var isWebiOS = webiOS();
 var isWebAndroid = webAndroid();
+var version = fetchVersion();
 
 var env$1 = {
   isDingtalk: isDingtalk,
@@ -242,7 +258,8 @@ var env$1 = {
   isWeexAndroid: isWeexAndroid,
   bundleFrameworkType: bundleFrameworkType,
   bundleUrl: bundleUrl,
-  originalUrl: originalUrl
+  originalUrl: originalUrl,
+  version: version
 };
 
 function compareVersion(oldVersion, newVersion, containEqual) {

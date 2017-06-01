@@ -1,7 +1,7 @@
 {
   "name": "dingtalk-timer",
-  "version": "0.0.4",
-  "description": "",
+  "version": "0.0.5",
+  "description": "weex and web setTimeout setInterval ",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,8 +10,8 @@
   "author": "icepy",
   "license": "MIT",
   "dependencies": {
-    "dingtalk-document": "^0.0.4",
-    "dingtalk-env": "^0.0.4",
-    "dingtalk-require": "^0.0.3"
+    "dingtalk-document": "^0.0.5",
+    "dingtalk-env": "^0.0.5",
+    "dingtalk-require": "^0.0.4"
   }
 }

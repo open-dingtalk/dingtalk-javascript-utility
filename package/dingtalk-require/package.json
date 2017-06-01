@@ -1,7 +1,7 @@
 {
   "name": "dingtalk-require",
-  "version": "0.0.3",
-  "description": "",
+  "version": "0.0.4",
+  "description": "require weex module",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,6 +10,6 @@
   "author": "icepy",
   "license": "MIT",
   "dependencies": {
-    "dingtalk-env": "^0.0.4"
+    "dingtalk-env": "^0.0.5"
   }
 }
