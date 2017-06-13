@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/icepy/weex-dingtalk-journey.git"
+    "url": "git+https://github.com/open-dingtalk/weex-dingtalk-journey.git"
   },
   "author": "icepy",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/icepy/weex-dingtalk-journey/issues"
+    "url": "https://github.com/open-dingtalk/weex-dingtalk-journey/issues"
   },
-  "homepage": "https://github.com/icepy/weex-dingtalk-journey#readme",
+  "homepage": "https://github.com/open-dingtalk/weex-dingtalk-journey#readme",
   "devDependencies": {
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-plugin-transform-flow-strip-types": "^6.22.0",
