@@ -1,6 +1,6 @@
 {
   "name": "dingtalk-require",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "require weex module",
   "main": "index.js",
   "scripts": {

@@ -283,23 +283,30 @@ function compareVersion(oldVersion, newVersion, containEqual) {
 }
 
 var bundleFrameworkType$1 = env$1.bundleFrameworkType;
+var isWeex$1 = env$1.isWeex;
 
 
 function requireModule(name) {
-  if (bundleFrameworkType$1 === 'Vue') {
-    return weex.requireModule(name);
+  if (isWeex$1) {
+    if (bundleFrameworkType$1 === 'Vue') {
+      return weex.requireModule(name);
+    } else {
+      var moduleName = '@weex-module/' + name;
+      return __weex_require__(moduleName);
+    }
   } else {
-    var moduleName = '@weex-module/' + name;
-    return __weex_require__(moduleName);
+    if (bundleFrameworkType$1 === 'Vue') {
+      return weex.requireModule(name);
+    }
   }
 }
 
 var bundleFrameworkType$2 = env$1.bundleFrameworkType;
-var isWeex$1 = env$1.isWeex;
+var isWeex$2 = env$1.isWeex;
 
 
 function Document() {
-  if (isWeex$1 && bundleFrameworkType$2 === 'Vue') {
+  if (isWeex$2 && bundleFrameworkType$2 === 'Vue') {
     return weex.document;
   } else {
     return document;
@@ -309,11 +316,11 @@ function Document() {
 var doc = Document();
 
 var timer = requireModule('timer');
-var isWeex$2 = env$1.isWeex;
+var isWeex$3 = env$1.isWeex;
 
 
 function setTimeout(handler, time) {
-  if (isWeex$2) {
+  if (isWeex$3) {
     timer.setTimeout(handler, time);
     return doc.taskCenter.callbackManager.lastCallbackId.toString();
   } else {
@@ -322,7 +329,7 @@ function setTimeout(handler, time) {
 }
 
 function clearTimeout(n) {
-  if (isWeex$2) {
+  if (isWeex$3) {
     timer.clearTimeout(n);
   } else {
     window.clearTimeout(n);
@@ -330,7 +337,7 @@ function clearTimeout(n) {
 }
 
 function setInterval(handler, time) {
-  if (isWeex$2) {
+  if (isWeex$3) {
     timer.setInterval(handler, time);
     return doc.taskCenter.callbackManager.lastCallbackId.toString();
   } else {
@@ -339,7 +346,7 @@ function setInterval(handler, time) {
 }
 
 function clearInterva(n) {
-  if (isWeex$2) {
+  if (isWeex$3) {
     timer.clearInterva(n);
   } else {
     window.clearInterva(n);
