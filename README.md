@@ -4,7 +4,7 @@
 
 ## For Chinese
 
-[weex-dingtalk-journey 中文]()
+[weex-dingtalk-journey 中文](https://open-doc.dingtalk.com/docs/doc.htm?spm=a219a.7629140.0.0.w1LNib&treeId=357&articleId=106828&docType=1)
 
 ## Install
 
