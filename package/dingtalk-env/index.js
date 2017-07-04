@@ -30,8 +30,9 @@ function whatEnv(){
       // Vue Web
       const href = location.href;
       const tpl = url.parse(href,'dd_wx_tpl');
+      const _wx_tpl = url.parse(href,'_wx_tpl');
       weexEnv.dingtalk = {
-        bundleUrl: tpl ? tpl : url.parse(href,'_wx_tpl'),
+        bundleUrl: tpl ? tpl : _wx_tpl ? _wx_tpl : '',
         originalUrl: href
       }
     }
@@ -41,13 +42,18 @@ function whatEnv(){
       weexEnv.platform = navigator.platform;
       weexEnv.appName = navigator.appName;
       weexEnv.appVersion = navigator.appVersion;
+      weexEnv.dingtalk = {
+        bundleUrl: __weex_options__.bundleUrl,
+        originalUrl: __weex_options__.originalUrl
+      };
     } else {
       // Rax Web
       weexEnv.platform = 'Web';
       const href = location.href;
       const tpl = url.parse(href,'dd_wx_tpl');
+      const _wx_tpl = url.parse(href,'_wx_tpl');
       weexEnv.dingtalk = {
-        bundleUrl: tpl ? tpl : url.parse(href,'_wx_tpl'),
+        bundleUrl: tpl ? tpl : _wx_tpl ? _wx_tpl : '',
         originalUrl: href
       }
     }

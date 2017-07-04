@@ -162,8 +162,9 @@ function whatEnv() {
       // Vue Web
       var href = location.href;
       var tpl = url.parse(href, 'dd_wx_tpl');
+      var _wx_tpl = url.parse(href, '_wx_tpl');
       weexEnv.dingtalk = {
-        bundleUrl: tpl ? tpl : url.parse(href, '_wx_tpl'),
+        bundleUrl: tpl ? tpl : _wx_tpl ? _wx_tpl : '',
         originalUrl: href
       };
     }
@@ -173,13 +174,18 @@ function whatEnv() {
       weexEnv.platform = navigator.platform;
       weexEnv.appName = navigator.appName;
       weexEnv.appVersion = navigator.appVersion;
+      weexEnv.dingtalk = {
+        bundleUrl: __weex_options__.bundleUrl,
+        originalUrl: __weex_options__.originalUrl
+      };
     } else {
       // Rax Web
       weexEnv.platform = 'Web';
       var _href = location.href;
       var _tpl = url.parse(_href, 'dd_wx_tpl');
+      var _wx_tpl2 = url.parse(_href, '_wx_tpl');
       weexEnv.dingtalk = {
-        bundleUrl: _tpl ? _tpl : url.parse(_href, '_wx_tpl'),
+        bundleUrl: _tpl ? _tpl : _wx_tpl2 ? _wx_tpl2 : '',
         originalUrl: _href
       };
     }
