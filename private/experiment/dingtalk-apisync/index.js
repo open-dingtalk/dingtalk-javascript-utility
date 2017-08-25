@@ -1,6 +1,10 @@
 import dingtalk from 'dingtalk-javascript-sdk';
 import timer from 'dingtalk-timer';
 
+/*
+  实验私有模块，同步版会影响性能
+*/
+
 const { setTimeout, clearTimeout } = timer;
 
 function apisync(){

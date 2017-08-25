@@ -2,6 +2,12 @@ import dingtalk from 'dingtalk-javascript-sdk';
 import env from 'dingtalk-env';
 import timer from 'dingtalk-timer';
 
+/*
+  实验私有模块，同步版会影响性能
+
+  此版本会给所有的api包一层ready函数
+*/
+
 const { setTimeout, clearTimeout } = timer;
 
 function apisync(){
