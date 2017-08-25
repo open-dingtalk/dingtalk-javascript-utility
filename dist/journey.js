@@ -134,36 +134,26 @@ var url = {
   parse: parse$1
 };
 
-function whatEnv() {
-  /*
-    env Object ======= !!!!
-     platform,
-    bundleFrameworkType,
-    dingtalk {
-     bundleUrl,
-     originalUrl
-    }
-    appName
-    */
-  var weexEnv = {};
+function getEnv() {
+  var containerEnv = {};
   if (typeof weex !== 'undefined') {
     var config = weex.config;
     var _env = config.env;
-    weexEnv.platform = _env.platform;
-    weexEnv.bundleFrameworkType = 'Vue';
-    if (weexEnv.platform !== 'Web') {
-      weexEnv.dingtalk = {
+    containerEnv.platform = _env.platform;
+    containerEnv.bundleFrameworkType = 'Vue';
+    if (containerEnv.platform !== 'Web') {
+      containerEnv.dingtalk = {
         bundleUrl: config.bundleUrl,
         originalUrl: config.originalUrl
       };
-      weexEnv.appVersion = _env.appVersion;
-      weexEnv.appName = _env.appName;
+      containerEnv.appVersion = _env.appVersion;
+      containerEnv.appName = _env.appName;
     } else {
       // Vue Web
       var href = location.href;
       var tpl = url.parse(href, 'dd_wx_tpl');
       var _wx_tpl = url.parse(href, '_wx_tpl');
-      weexEnv.dingtalk = {
+      containerEnv.dingtalk = {
         bundleUrl: tpl ? tpl : _wx_tpl ? _wx_tpl : '',
         originalUrl: href
       };
@@ -171,30 +161,30 @@ function whatEnv() {
   } else {
     // Rax Weex
     if (typeof callNative === 'function') {
-      weexEnv.platform = navigator.platform;
-      weexEnv.appName = navigator.appName;
-      weexEnv.appVersion = navigator.appVersion;
-      weexEnv.dingtalk = {
+      containerEnv.platform = navigator.platform;
+      containerEnv.appName = navigator.appName;
+      containerEnv.appVersion = navigator.appVersion;
+      containerEnv.dingtalk = {
         bundleUrl: __weex_options__.bundleUrl,
         originalUrl: __weex_options__.originalUrl
       };
     } else {
       // Rax Web
-      weexEnv.platform = 'Web';
+      containerEnv.platform = 'Web';
       var _href = location.href;
       var _tpl = url.parse(_href, 'dd_wx_tpl');
       var _wx_tpl2 = url.parse(_href, '_wx_tpl');
-      weexEnv.dingtalk = {
+      containerEnv.dingtalk = {
         bundleUrl: _tpl ? _tpl : _wx_tpl2 ? _wx_tpl2 : '',
         originalUrl: _href
       };
     }
-    weexEnv.bundleFrameworkType = 'Rax';
+    containerEnv.bundleFrameworkType = 'Rax';
   }
-  return weexEnv;
+  return containerEnv;
 }
 
-var env = whatEnv();
+var env = getEnv();
 var isWeb = env.platform === 'Web';
 var isWeexiOS = env.platform === 'iOS';
 var isWeexAndroid = env.platform === 'android';

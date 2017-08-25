@@ -1,4 +1,4 @@
-import dingtalk from 'weex-dingtalk';
+import dingtalk from 'dingtalk-javascript-sdk';
 import env from 'dingtalk-env';
 import timer from 'dingtalk-timer';
 

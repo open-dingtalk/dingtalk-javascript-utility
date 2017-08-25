@@ -1,4 +1,4 @@
-import dingtalk from 'weex-dingtalk';
+import dingtalk from 'dingtalk-javascript-sdk';
 import timer from 'dingtalk-timer';
 
 const { setTimeout, clearTimeout } = timer;

@@ -1,8 +1,8 @@
 {
-  "name": "weex-dingtalk-journey",
+  "name": "dingtalk-javascript-utility",
   "version": "0.1.4",
   "description": "A modern JavaScript utility library, using in Web and Weex",
-  "main": "dist/journey.js",
+  "main": "dist/journey-min.js",
   "scripts": {
     "es5": "node ./build/build.js build",
     "dev": "node ./build/build.js dev --watch",
@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/open-dingtalk/weex-dingtalk-journey.git"
+    "url": "git@github.com:icepy/dingtalk-javascript-utility.git"
   },
   "author": "icepy",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/open-dingtalk/weex-dingtalk-journey/issues"
+    "url": "https://github.com/icepy/dingtalk-javascript-utility/issues"
   },
-  "homepage": "https://github.com/open-dingtalk/weex-dingtalk-journey#readme",
+  "homepage": "https://github.com/icepy/dingtalk-javascript-utility#readme",
   "devDependencies": {
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-plugin-transform-flow-strip-types": "^6.22.0",
@@ -35,6 +35,6 @@
     "rollup-watch": "^3.2.2"
   },
   "dependencies": {
-    "weex-dingtalk": "^0.1.1"
+    "dingtalk-javascript-sdk": "^0.1.5"
   }
 }
