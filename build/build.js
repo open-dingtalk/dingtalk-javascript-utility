@@ -20,21 +20,21 @@ if (process.argv[2]){
 
 function build(name){
   let config = {
-    entry: './src/index.js',
+    entry: './src/local.index.js',
     plugins: [
       alias(configAlias),
       resolve(),
       commonjs(),
       babel()
     ],
-    dest:'./dist/journey.js',
+    dest:'./dist/dingtalk-javascript-utility.js',
     format: 'cjs',
     sourceMap: true
   };
 
   if (name === 'build'){
     config.plugins.push(uglify());
-    config.dest = './dist/journey-min.js'
+    config.dest = './dist/dingtalk-javascript-utility.js'
   }
 
   if (isWatch){

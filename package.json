@@ -1,6 +1,6 @@
 {
   "name": "dingtalk-javascript-utility",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "A modern JavaScript utility library, using in Web and Weex",
   "main": "src/index.js",
   "scripts": {
@@ -21,7 +21,6 @@
   "homepage": "https://github.com/icepy/dingtalk-javascript-utility#readme",
   "devDependencies": {
     "babel-plugin-external-helpers": "^6.22.0",
-    "babel-plugin-transform-flow-strip-types": "^6.22.0",
     "babel-preset-es2015-rollup": "^3.0.0",
     "chai": "^3.5.0",
     "glob": "^7.1.1",
