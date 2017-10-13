@@ -35,6 +35,6 @@
     "rollup-watch": "^3.2.2"
   },
   "dependencies": {
-    "dingtalk-javascript-sdk": "^0.1.5"
+    "dingtalk-javascript-sdk": "^0.1.6"
   }
 }
