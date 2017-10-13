@@ -1,6 +1,6 @@
-import requireModule from 'dingtalk-require';
-import document from 'dingtalk-document';
-import env from 'dingtalk-env';
+import requireModule from '../dingtalk-require';
+import document from '../dingtalk-document';
+import env from '../dingtalk-env';
 
 const timer = requireModule('timer');
 const { isWeex } = env;

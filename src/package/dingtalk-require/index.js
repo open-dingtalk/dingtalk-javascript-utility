@@ -1,4 +1,4 @@
-import env from 'dingtalk-env';
+import env from '../dingtalk-env';
 
 const { bundleFrameworkType,isWeex } = env;
 

@@ -1,4 +1,4 @@
-import querystring from 'dingtalk-querystring';
+import querystring from '../dingtalk-querystring';
 
 function format(url, query){
   let search = querystring.stringify(query);

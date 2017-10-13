@@ -1,4 +1,4 @@
-import url from 'dingtalk-url';
+import url from '../dingtalk-url';
 
 function getEnv(){
   let containerEnv = {};

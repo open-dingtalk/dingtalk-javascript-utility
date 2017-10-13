@@ -1,11 +1,11 @@
-import querystring from 'dingtalk-querystring';
-import url from 'dingtalk-url';
-import env from 'dingtalk-env';
-import compareVersion from 'dingtalk-version';
-import requireModule from 'dingtalk-require';
-import document from 'dingtalk-document';
-import timer from 'dingtalk-timer';
-import logger from 'dingtalk-log'
+import querystring from './package/dingtalk-querystring';
+import url from './package/dingtalk-url';
+import env from './package/dingtalk-env';
+import compareVersion from './package/dingtalk-version';
+import requireModule from './package/dingtalk-require';
+import document from './package/dingtalk-document';
+import timer from './package/dingtalk-timer';
+import logger from './package/dingtalk-log'
 
 const { log, setLog, LogType } = logger;
 
