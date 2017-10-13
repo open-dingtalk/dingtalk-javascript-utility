@@ -39,15 +39,15 @@ function parse(qs, sep, eq) {
     var cur = obj[queryKey];
     if (cur) {
       if (Array.isArray(cur)) {
-        cur.push(queryVal);
+        cur.push(decodeURIComponent(queryVal));
       } else {
         var temp = cur;
         obj[queryKey] = new Array();
         obj[queryKey].push(temp);
-        obj[queryKey].push(queryVal);
+        obj[queryKey].push(decodeURIComponent(queryVal));
       }
     } else {
-      obj[queryKey] = queryVal;
+      obj[queryKey] = decodeURIComponent(queryVal);
     }
   }
   return obj;
@@ -71,7 +71,7 @@ function stringify(obj, sep, eq) {
         var vlast = vlen - 1;
         var j = 0;
         for (; j < vlen; ++j) {
-          fields += ks + v[j];
+          fields += ks + decodeURIComponent(v[j]);
           if (j < vlast) {
             fields += sep;
           }
@@ -80,7 +80,7 @@ function stringify(obj, sep, eq) {
           fields += sep;
         }
       } else {
-        fields += ks + v;
+        fields += ks + decodeURIComponent(v);
         if (i < flast) {
           fields += sep;
         }
