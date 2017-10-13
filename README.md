@@ -20,6 +20,7 @@ $ npm install dingtalk-javascript-utility --save
 * isWeexiOS 是否为Weex环境中的iOS设备
 * originalUrl 用户配置的originalUrl
 * version 钉钉客户端版本号
+* platform 输出环境标识符
 
 ```JavaScript
 import utility from 'dingtalk-javascript-utility';
@@ -150,4 +151,19 @@ compareVersion('3.4.10','3.5') // true
 
 compareVersion('3.4.10','3.4') // false
 
+```
+
+# log（Object）
+
+日志等级系统
+
+```JavaScript
+import utility from 'dingtalk-javascript-utility'
+
+const { LogType, setLog,log} = utility;
+
+log(['default'])
+log(['info ...'],LogType.INFO)
+log(['error ...'],LogType.ERROR)
+log(['warning ...'],LogType.WARNING)
 ```
