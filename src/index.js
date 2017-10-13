@@ -5,6 +5,9 @@ import compareVersion from 'dingtalk-version';
 import requireModule from 'dingtalk-require';
 import document from 'dingtalk-document';
 import timer from 'dingtalk-timer';
+import logger from 'dingtalk-log'
+
+const { log, setLog, LogType } = logger;
 
 export default {
   querystring,
@@ -13,5 +16,8 @@ export default {
   compareVersion,
   requireModule,
   document,
-  timer
+  timer,
+  LogType, 
+  setLog, 
+  log
 };

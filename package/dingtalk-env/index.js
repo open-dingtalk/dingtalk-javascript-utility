@@ -107,6 +107,24 @@ const isWebiOS = webiOS();
 const isWebAndroid = webAndroid();
 const version = fetchVersion();
 
+function toPlatform(){
+  let platform;
+  if(isDingtalk){
+    if (isWebAndroid){
+      platform = 'web.android';
+    } else if (isWebiOS) {
+      platform = 'web.ios';
+    } else if (isWeexAndroid){
+      platform = 'weex.android';
+    } else if (isWeexiOS){
+      platform = 'weex.ios';
+    }
+  } else {
+    platform = 'not.dingtalk'
+  }
+  return platform;
+}
+
 export default {
   isDingtalk,
   isWeb,
@@ -118,5 +136,6 @@ export default {
   bundleFrameworkType,
   bundleUrl,
   originalUrl,
-  version
+  version,
+  platform: toPlatform()
 };

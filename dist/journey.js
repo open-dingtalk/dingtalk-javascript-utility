@@ -6,6 +6,70 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
 };
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var toConsumableArray = function (arr) {
+  if (Array.isArray(arr)) {
+    for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i];
+
+    return arr2;
+  } else {
+    return Array.from(arr);
+  }
+};
+
 function parse(qs, sep, eq) {
   var obj = Object.create(null);
   if (typeof qs !== 'string' || qs.length === 0) {
@@ -244,6 +308,24 @@ var isWebiOS = webiOS();
 var isWebAndroid = webAndroid();
 var version = fetchVersion();
 
+function toPlatform() {
+  var platform = void 0;
+  if (isDingtalk) {
+    if (isWebAndroid) {
+      platform = 'web.android';
+    } else if (isWebiOS) {
+      platform = 'web.ios';
+    } else if (isWeexAndroid) {
+      platform = 'weex.android';
+    } else if (isWeexiOS) {
+      platform = 'weex.ios';
+    }
+  } else {
+    platform = 'not.dingtalk';
+  }
+  return platform;
+}
+
 var env$1 = {
   isDingtalk: isDingtalk,
   isWeb: isWeb,
@@ -255,7 +337,8 @@ var env$1 = {
   bundleFrameworkType: bundleFrameworkType,
   bundleUrl: bundleUrl,
   originalUrl: originalUrl,
-  version: version
+  version: version,
+  platform: toPlatform()
 };
 
 function compareVersion(oldVersion, newVersion, containEqual) {
@@ -356,6 +439,72 @@ var timer$1 = {
   clearInterva: clearInterva
 };
 
+var LOG = 'LOG';
+var INFO = 'INFO';
+var WARNING = 'WARNING';
+var ERROR = 'ERROR';
+
+var LogType$1 = {
+  LOG: LOG,
+  INFO: INFO,
+  WARNING: WARNING,
+  ERROR: ERROR
+};
+
+function fillZore(str) {
+  var res = '00' + str;
+  return res.substring(res.length - 2);
+}
+
+var logChannel = function logChannel(logData) {
+  var _console, _console2, _console3, _console4;
+
+  var time = fillZore(logData.time.getHours()) + ':' + fillZore(logData.time.getMinutes()) + ':' + fillZore(logData.time.getSeconds());
+  switch (logData.type) {
+    case LogType$1.LOG:
+      (_console = console).log.apply(_console, ['time:' + time + ' | log: '].concat(toConsumableArray(logData.logArr)));
+      break;
+    case LogType$1.INFO:
+      (_console2 = console).info.apply(_console2, ['time:' + time + ' | info: '].concat(toConsumableArray(logData.logArr)));
+      break;
+    case LogType$1.ERROR:
+      (_console3 = console).error.apply(_console3, ['time:' + time + ' | error: '].concat(toConsumableArray(logData.logArr)));
+      break;
+    case LogType$1.WARNING:
+      (_console4 = console).warn.apply(_console4, ['time:' + time + ' | warning: '].concat(toConsumableArray(logData.logArr)));
+      break;
+    default:
+      break;
+  }
+};
+
+var setLog$1 = function setLog(fn) {
+  logChannel = fn;
+};
+
+var log$1 = function log(logArr) {
+  var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : LogType$1.LOG;
+
+  logChannel({
+    type: type,
+    logArr: logArr,
+    time: new Date()
+  });
+};
+
+log$1(['current environment: ' + env$1.platform]);
+
+var logger = {
+  log: log$1,
+  setLog: setLog$1,
+  LogType: LogType$1
+};
+
+var log = logger.log;
+var setLog = logger.setLog;
+var LogType = logger.LogType;
+
+
 var index = {
   querystring: querystring,
   url: url,
@@ -363,7 +512,10 @@ var index = {
   compareVersion: compareVersion,
   requireModule: requireModule,
   document: doc,
-  timer: timer$1
+  timer: timer$1,
+  LogType: LogType,
+  setLog: setLog,
+  log: log
 };
 
 module.exports = index;

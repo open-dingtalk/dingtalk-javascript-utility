@@ -11,5 +11,6 @@ module.exports = {
   "dingtalk-version": absolute("package/dingtalk-version/index.js"),
   "dingtalk-timer": absolute("package/dingtalk-timer/index.js"),
   "dingtalk-require": absolute("package/dingtalk-require/index.js"),
-  "dingtalk-document": absolute("package/dingtalk-document/index.js")
+  "dingtalk-document": absolute("package/dingtalk-document/index.js"),
+  "dingtalk-log": absolute("package/dingtalk-log/index.js")
 };
