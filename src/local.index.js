@@ -6,9 +6,10 @@ import requireModule from './package/dingtalk-require';
 import document from './package/dingtalk-document';
 import timer from './package/dingtalk-timer';
 import logger from './package/dingtalk-log';
-import callTransform from './package/dingtalk-callTransform';
+import dingtalkCallTransform from './package/dingtalk-callTransform';
 
 const { log, setLog, LogType } = logger;
+const { callTransform, setCallTransformSource } = dingtalkCallTransform;
 
 export default {
   querystring,

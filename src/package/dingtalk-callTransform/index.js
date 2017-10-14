@@ -1,4 +1,5 @@
-import dingtalk from 'dingtalk-javascript-sdk'
+
+let dingtalkSDK;
 
 function run(fn){
   dingtalk.ready(() => {
@@ -23,4 +24,11 @@ function callTransform(names, opt = {}){
   });
 }
 
-export default callTransform;
+function setCallTransformSource(dingtalk){
+  dingtalkSDK = dingtalk || {};
+}
+
+export default {
+  callTransform,
+  setCallTransformSource
+};

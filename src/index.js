@@ -16,7 +16,7 @@ export const requireModule = dingRequireModule;
 export const document = dingDocument;
 export const timer = dingTimer;
 export const { log, setLog, LogType } = dingLogger;
-export const callTransform = dingCallTransform;
+export const { callTransform, setCallTransformSource } = dingCallTransform;
 
 export default {
   querystring,
@@ -29,5 +29,6 @@ export default {
   LogType, 
   setLog, 
   log,
-  callTransform
+  callTransform,
+  setCallTransformSource
 };
