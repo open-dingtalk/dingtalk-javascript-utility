@@ -173,10 +173,12 @@ log(['warning ...'],LogType.WARNING)
 将钉钉JSAPI转换成返回Promise对象
 
 ```JavaScript
+import dingtalk from 'dingtalk-javascript-sdk'
 import utility from 'dingtalk-javascript-utility'
 
-const { callTransform } = utility;
+const { callTransform, setCallTransformSource } = utility;
 
+setCallTransformSource(dingtalk)
 callTransform('biz.navigation.setTitle',{}).then(response => {}).catch(err => {})
 
 ```

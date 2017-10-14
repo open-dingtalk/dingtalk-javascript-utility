@@ -2,8 +2,8 @@
 let dingtalkSDK;
 
 function run(fn){
-  dingtalk.ready(() => {
-    fn(dingtalk.apis);
+  dingtalkSDK.ready(() => {
+    fn(dingtalkSDK.apis);
   });
 }
 

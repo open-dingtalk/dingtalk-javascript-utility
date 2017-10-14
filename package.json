@@ -1,6 +1,6 @@
 {
   "name": "dingtalk-javascript-utility",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "A modern JavaScript utility library, using in Web and Weex",
   "main": "src/index.js",
   "scripts": {
