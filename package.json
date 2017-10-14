@@ -1,6 +1,6 @@
 {
   "name": "dingtalk-javascript-utility",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "A modern JavaScript utility library, using in Web and Weex",
   "main": "src/index.js",
   "scripts": {
@@ -34,6 +34,6 @@
     "rollup-watch": "^3.2.2"
   },
   "dependencies": {
-    "dingtalk-javascript-sdk": "^0.1.6"
+    "dingtalk-javascript-sdk": "^0.1.7"
   }
 }
