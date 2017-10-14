@@ -5,7 +5,8 @@ import dingCompareVersion from './package/dingtalk-version';
 import dingRequireModule from './package/dingtalk-require';
 import dingDocument from './package/dingtalk-document';
 import dingTimer from './package/dingtalk-timer';
-import dingLogger from './package/dingtalk-log'
+import dingLogger from './package/dingtalk-log';
+import dingCallTransform from './package/dingtalk-callTransform';
 
 export const querystring = dingQueryString;
 export const url = dingUrl;
@@ -15,6 +16,7 @@ export const requireModule = dingRequireModule;
 export const document = dingDocument;
 export const timer = dingTimer;
 export const { log, setLog, LogType } = dingLogger;
+export const callTransform = dingCallTransform;
 
 export default {
   querystring,
@@ -26,5 +28,6 @@ export default {
   timer,
   LogType, 
   setLog, 
-  log
+  log,
+  callTransform
 };

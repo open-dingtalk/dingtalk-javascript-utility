@@ -5,7 +5,8 @@ import compareVersion from './package/dingtalk-version';
 import requireModule from './package/dingtalk-require';
 import document from './package/dingtalk-document';
 import timer from './package/dingtalk-timer';
-import logger from './package/dingtalk-log'
+import logger from './package/dingtalk-log';
+import callTransform from './package/dingtalk-callTransform';
 
 const { log, setLog, LogType } = logger;
 
@@ -19,5 +20,6 @@ export default {
   timer,
   LogType, 
   setLog, 
-  log
+  log,
+  callTransform
 };
