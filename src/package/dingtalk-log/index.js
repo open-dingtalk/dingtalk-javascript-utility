@@ -1,5 +1,3 @@
-import env from '../dingtalk-env';
-
 const LOG = 'LOG';
 const INFO = 'INFO';
 const WARNING = 'WARNING';
@@ -50,8 +48,6 @@ const log = (logArr, type = LogType.LOG) => {
     time: new Date(),
   });
 };
-
-log(['current environment: ' + env.platform]);
 
 export default {
   log,
