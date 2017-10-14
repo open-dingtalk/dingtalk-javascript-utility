@@ -1,8 +1,8 @@
 {
   "name": "dingtalk-javascript-utility",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "A modern JavaScript utility library, using in Web and Weex",
-  "main": "src/index.js",
+  "main": "dist/dingtalk-javascript-utility.js",
   "scripts": {
     "es5": "node ./build/build.js build",
     "dev": "node ./build/build.js dev --watch",

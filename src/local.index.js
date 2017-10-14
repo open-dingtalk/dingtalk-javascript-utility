@@ -1,15 +1,22 @@
-import querystring from './package/dingtalk-querystring';
-import url from './package/dingtalk-url';
-import env from './package/dingtalk-env';
-import compareVersion from './package/dingtalk-version';
-import requireModule from './package/dingtalk-require';
-import document from './package/dingtalk-document';
-import timer from './package/dingtalk-timer';
-import logger from './package/dingtalk-log';
-import dingtalkCallTransform from './package/dingtalk-callTransform';
+import dingQueryString from './package/dingtalk-querystring';
+import dingUrl from './package/dingtalk-url';
+import dingEnv from './package/dingtalk-env';
+import dingCompareVersion from './package/dingtalk-version';
+import dingRequireModule from './package/dingtalk-require';
+import dingDocument from './package/dingtalk-document';
+import dingTimer from './package/dingtalk-timer';
+import dingLogger from './package/dingtalk-log';
+import dingCallTransform from './package/dingtalk-callTransform';
 
-const { log, setLog, LogType } = logger;
-const { callTransform, setCallTransformSource } = dingtalkCallTransform;
+export const querystring = dingQueryString;
+export const url = dingUrl;
+export const env = dingEnv;
+export const compareVersion = dingCompareVersion;
+export const requireModule = dingRequireModule;
+export const document = dingDocument;
+export const timer = dingTimer;
+export const { log, setLog, LogType } = dingLogger;
+export const { callTransform, setCallTransformSource } = dingCallTransform;
 
 export default {
   querystring,
@@ -22,5 +29,6 @@ export default {
   LogType, 
   setLog, 
   log,
-  callTransform
+  callTransform,
+  setCallTransformSource
 };

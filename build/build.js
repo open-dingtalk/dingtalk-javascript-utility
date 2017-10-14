@@ -20,7 +20,7 @@ if (process.argv[2]){
 
 function build(name){
   let config = {
-    entry: './src/local.index.js',
+    entry: './src/index.js',
     plugins: [
       alias(configAlias),
       resolve(),
@@ -34,7 +34,7 @@ function build(name){
 
   if (name === 'build'){
     config.plugins.push(uglify());
-    config.dest = './dist/dingtalk-javascript-utility.js'
+    config.dest = './dist/dingtalk-javascript-utility-min.js'
   }
 
   if (isWatch){
