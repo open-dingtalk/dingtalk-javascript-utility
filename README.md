@@ -160,7 +160,7 @@ compareVersion('3.4.10','3.4') // false
 ```JavaScript
 import utility from 'dingtalk-javascript-utility'
 
-const { LogType, setLog,log} = utility;
+const { LogType, setLog,log } = utility;
 
 log(['default'])
 log(['info ...'],LogType.INFO)
@@ -168,41 +168,6 @@ log(['error ...'],LogType.ERROR)
 log(['warning ...'],LogType.WARNING)
 ```
 
-# callTransform
-
-将钉钉JSAPI转换成返回Promise对象
-
-```JavaScript
-import dingtalk from 'dingtalk-javascript-sdk'
-import utility from 'dingtalk-javascript-utility'
-
-const { callTransform, setCallTransformSource } = utility;
-
-setCallTransformSource(dingtalk)
-callTransform('biz.navigation.setTitle',{}).then(response => {}).catch(err => {})
-
-```
-
 # Private
 
 实验性质（慎用）
-
-> index.js 为阻塞版本，一直会等待生成API列表之后，程序才会执行，可以直接引用，大概需要80ms。
-
-```JavaScript
-
-import dd from './dingtalk-apisync/index.js'
-
-dd.biz.navigation.setTitle({}) // 内部无ready包装
-
-```
-> addReady.js 会给每一个api添加一个包装ready方法
-
-```JavaScript
-import dd from './dingtalk-apisync/addReady.js'
-
-dd.biz.navigation.setTitle({}) //内部有ready包装
-
-```
-
-`ready`包装函数主要用于SDK初始化完成的回调以及JSAPI授权认证的回调，在钉钉中有些API是需要授权的，需要在ready方法中。
