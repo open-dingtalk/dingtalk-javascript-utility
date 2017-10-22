@@ -25,13 +25,25 @@ const snifferWeexVueMap = [
   'document'
 ];
 
-const PLATFORMS = {
+export const RUNTIME = {
   WEB: 'Web',
-  NATIVE: 'Native',
+  WEEX: 'Weex',
   UNKNOWN: 'Unknown'
-};
+}
 
-const FRAMEWORK = {
+export const DEVICE = {
+  
+}
+
+export const PLATFORM = {
+  MAC: 'Mac',
+  WINDOWS: 'Windows',
+  IOS: 'iOS',
+  ANDROID: 'Android',
+  IPAD: 'iPad'
+}
+
+export const FRAMEWORK = {
   VUE: 'Vue',
   RAX: 'Rax',
   UNKNOWN: 'Unknown'
@@ -50,16 +62,16 @@ function snifferMachine(snifferMap,source){
   return result;
 }
 
-const platform = (() => {
+function whichOneRuntime(){
   if (maybeInWebView && maybeInWeexVueEnv){
     // webview
     return snifferMachine(snifferWeexVueMap,weex) ? 'Web.Vue' : 'Web.Unknown';
   } else if (!maybeInWebView && maybeInWeexVueEnv){
     // native
-    return snifferMachine(snifferWeexVueMap,weex) ? 'Native.Vue' : 'Native.Unknown';
+    return snifferMachine(snifferWeexVueMap,weex) ? 'Weex.Vue' : 'Weex.Unknown';
   } else if (maybeInWebView && maybeInNative && !maybeInWeexVueEnv){
     // native
-    return snifferMachine(snifferWeexRaxMap,window) ? 'Native.Rax' : 'Native.Unknown';
+    return snifferMachine(snifferWeexRaxMap,window) ? 'Weex.Rax' : 'Weex.Unknown';
   } else {
     // default webview
     if (maybeInWebView){
@@ -67,61 +79,36 @@ const platform = (() => {
     } 
   }
   return 'Unknown.Unknown';
-})();
-
-const [ platformEnv, framework ] = platform.split('.');
-
-function dingtalkWebUrl(originalUrl){
-  const tpl = url.parse(originalUrl,'dd_wx_tpl');
-  const _wx_tpl = url.parse(originalUrl,'_wx_tpl');
-  return {
-    bundleUrl: tpl ? tpl : _wx_tpl ? _wx_tpl : '',
-    originalUrl
-  }
 }
+
+const [ runtime, framework ] = whichOneRuntime().split('.');
 
 function getEnv(){
   let containerEnv = {};
   switch (framework){
     case FRAMEWORK.VUE:
-        const config = weex.config;
         const env = config.env;
         containerEnv.platform = env.platform;
-        containerEnv.bundleFrameworkType = framework;
-        if (PLATFORMS.NATIVE === platformEnv){
+        if (RUNTIME.WEEX === runtime){
           containerEnv.appVersion = env.appVersion;
           containerEnv.appName = env.appName;
-          containerEnv.dingtalk = {
-            bundleUrl: config.bundleUrl,
-            originalUrl: config.originalUrl
-          }
-        }
-        if (PLATFORMS.WEB === platformEnv){
-          containerEnv.dingtalk = dingtalkWebUrl(location.href);
         }
       break;
     case FRAMEWORK.RAX:
-        if (PLATFORMS.NATIVE === platformEnv) {
-          containerEnv.bundleFrameworkType = framework;
+        if (RUNTIME.WEEX === runtime) {
           containerEnv.platform = navigator.platform;
           containerEnv.appName = navigator.appName;
           containerEnv.appVersion = navigator.appVersion;
-          containerEnv.dingtalk = {
-            bundleUrl: __weex_options__.bundleUrl,
-            originalUrl: __weex_options__.originalUrl
-          };
         }
       break;
     case FRAMEWORK.UNKNOWN:
-        if (PLATFORMS.WEB === platformEnv){
-          containerEnv.platform = PLATFORMS.WEB;
+        if (RUNTIME.WEB === runtime){
+          containerEnv.platform = RUNTIME.WEB;
         }
-        if (PLATFORMS.UNKNOWN === platformEnv){
-          log(['current platform environment is unknown, please checking.'],LogType.WARNING);
-          containerEnv.platform = PLATFORMS.UNKNOWN;
-        }
-        containerEnv.bundleFrameworkType = FRAMEWORK.UNKNOWN;
-        containerEnv.dingtalk = dingtalkWebUrl(location.href);
+        if (RUNTIME.UNKNOWN === runtime){
+          log(['current runtime environment is unknown, please checking.'],LogType.WARNING);
+          containerEnv.platform = RUNTIME.UNKNOWN;
+        }        
       break;
   }  
   return containerEnv;
@@ -131,13 +118,11 @@ const env = getEnv();
 const isWeb = env.platform === 'Web';
 const isWeexiOS = env.platform === 'iOS';
 const isWeexAndroid = env.platform === 'android';
-const isWeex = isWeexiOS || isWeexAndroid;
-const { dingtalk, bundleFrameworkType } = env;
-const { bundleUrl, originalUrl } = dingtalk;
+const isWeex = isWeexAndroid && isWeexiOS;
 
 function ua(){
   if(isWeb){
-    return window.navigator.userAgent.toLowerCase();
+    return window.navigator.userAgent;
   }
   return '';
 }
@@ -161,14 +146,14 @@ function getPcConf(){
 const UA = ua();
 const pcConf = getPcConf();
 
-function mdContainer(){
+function dingTalkContainer(){
   if (isWeex){
     if (env.appName === 'DingTalk' || env.appName === 'com.alibaba.android.rimet'){
       return true;
     }
     return false;
   } else {
-    return UA.indexOf('dingtalk') > -1 || UA.indexOf('aliapp') > -1;
+    return UA.indexOf('dingtalk') > -1 || UA.indexOf('aliapp') > -1 || UA.indexOf('dingtalk-win') > -1;
   }
 }
 
@@ -199,27 +184,19 @@ function fetchVersion(){
 const isWebiOS = /iphone|ipad|ipod|ios/.test(UA);
 const isWebAndroid = UA.indexOf('android') > -1;
 const version = fetchVersion();
-const isMobileDingtalk = mdContainer();
-const isWindowsDingtalk = UA.indexOf('dingtalk-win') > -1;
-const isMac = UA.indexOf('mac') > -1;
-const isWin = UA.indexOf('win') > -1;
+const isDingtalk = dingTalkContainer();
+const isPCMac = UA.indexOf('mac') > -1;
+const isPCWindows = UA.indexOf('win') > -1;
 const isPC = pdContainer();
 
 export default {
-  isMobileDingtalk,
-  isWindowsDingtalk,
-  isMac,
-  isWin,
-  isPC,
-  isWeb,
+  isDingtalk,
   isWebiOS,
   isWebAndroid,
-  isWeex,
   isWeexiOS,
   isWeexAndroid,
-  bundleFrameworkType,
-  bundleUrl,
-  originalUrl,
   version,
-  platform: platform
+  runtime,
+  framework,
+  platform: ''
 };

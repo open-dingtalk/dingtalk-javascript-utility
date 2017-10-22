@@ -3,7 +3,7 @@
 源码访问：[https://github.com/icepy/dingtalk-javascript-utility](https://github.com/icepy/dingtalk-javascript-utility)
 
 
-# umd
+# UMD
 
 ```JavaScript
 var DTUtility = window.DTUtility;
@@ -187,6 +187,19 @@ log(['default'])
 log(['info ...'],LogType.INFO)
 log(['error ...'],LogType.ERROR)
 log(['warning ...'],LogType.WARNING)
+```
+
+# config（Object）
+
+日志等级系统
+
+```JavaScript
+import DTUtility from 'dingtalk-javascript-utility'
+
+const { config } = DTUtility;
+
+// config.bundleUrl
+// config.originalUrl
 ```
 
 # Private
