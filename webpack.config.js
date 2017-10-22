@@ -1,10 +1,10 @@
 var webpack = require('webpack')
 
 var config = {
-  entry: './index.js',
+  entry: './src/index.js',
   devtool: 'source-map',
   output: {
-    path: __dirname + '/dist/umd',
+    path: __dirname + '/umd',
     filename: 'dingtalk-javascript-utility.js',
     library: 'DTUtility',
     libraryTarget: 'umd',

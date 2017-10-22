@@ -2,12 +2,12 @@
   "name": "dingtalk-javascript-utility",
   "version": "0.2.6",
   "description": "A modern JavaScript utility library, using in Web and Weex",
-  "main": "dist/lib/index.js",
+  "main": "lib/index.js",
   "scripts": {
-    "build": "babel index.js ./package -d dist/lib --copy-files --source-maps && webpack && NODE_ENV=pro webpack",
-    "es":"babel index.js ./package --watch -d dist/lib --copy-files --source-maps",
+    "build": "babel src -d lib --copy-files --source-maps && webpack && NODE_ENV=pro webpack",
+    "es":"babel src --watch -d lib --copy-files --source-maps",
     "umd":"webpack",
-    "test": "node ./node_modules/mocha/bin/mocha test/**.js"
+    "test": "node ./node_modules/mocha/bin/mocha __tests__/*.js"
   },
   "repository": {
     "type": "git",

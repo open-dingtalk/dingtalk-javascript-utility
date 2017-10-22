@@ -1,5 +1,5 @@
-var journey = require('../dist/journey.js');
-var URL = journey.URL;
+var DTUtility = require('../dist/lib/index.js');
+var url = DTUtility.url;
 var expect = require('chai').expect;
 
 describe('URL',function(){

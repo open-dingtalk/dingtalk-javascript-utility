@@ -1,5 +1,5 @@
-var journey = require('../dist/journey.js');
-var querystring = journey.querystring;
+var DTUtility = require('../dist/lib/index.js');
+var querystring = DTUtility.querystring;
 var expect = require('chai').expect;
 
 describe('querystring',function(){

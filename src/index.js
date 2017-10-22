@@ -1,11 +1,11 @@
-import dingQueryString from './package/dingtalk-querystring';
-import dingUrl from './package/dingtalk-url';
-import dingEnv from './package/dingtalk-env';
-import dingCompareVersion from './package/dingtalk-version';
-import dingRequireModule from './package/dingtalk-require';
-import dingDocument from './package/dingtalk-document';
-import dingTimer from './package/dingtalk-timer';
-import dingLogger from './package/dingtalk-log';
+import dingQueryString from './dingtalk-querystring';
+import dingUrl from './dingtalk-url';
+import dingEnv from './dingtalk-env';
+import dingCompareVersion from './dingtalk-version';
+import dingRequireModule from './dingtalk-require';
+import dingDocument from './dingtalk-document';
+import dingTimer from './dingtalk-timer';
+import dingLogger from './dingtalk-log';
 
 export const querystring = dingQueryString;
 export const url = dingUrl;

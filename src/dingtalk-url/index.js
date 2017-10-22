@@ -11,11 +11,11 @@ function parse(url,parseQueryString){
     search: null
   };
   if (!url){
-    return {};
+    return '';
   }
   const searchIndex = url.indexOf('?');
   if (searchIndex === -1){
-    return {};
+    return '';
   }
   const hashIndex = url.indexOf('#');
   if (hashIndex > -1){
