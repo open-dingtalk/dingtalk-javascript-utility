@@ -5,7 +5,7 @@ var config = {
   devtool: 'source-map',
   output: {
     path: __dirname + '/umd',
-    filename: 'dingtalk-javascript-utility.js',
+    filename: 'index.js',
     library: 'DTUtility',
     libraryTarget: 'umd',
     umdNamedDefine: true
@@ -18,7 +18,7 @@ var config = {
 }
 
 if (process.env.NODE_ENV === 'pro'){
-  config.output.filename = 'dingtalk-javascript-utility-min.js'
+  config.output.filename = 'index-min.js'
   config.plugins = [(
     new webpack.optimize.UglifyJsPlugin({
       compress: {

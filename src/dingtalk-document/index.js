@@ -1,9 +1,7 @@
-import env from '../dingtalk-env';
-
-const { bundleFrameworkType, isWeex } = env;
+import { framework, isWeex } from '../util.js';
 
 function Document(){
-  if ( isWeex && bundleFrameworkType === 'Vue'){
+  if ( isWeex && framework === 'Vue'){
     return weex.document;
   } else {
     return document;

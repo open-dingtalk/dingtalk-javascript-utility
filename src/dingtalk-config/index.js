@@ -1,7 +1,6 @@
-import env, { RUNTIME, FRAMEWORK } from '../dingtalk-env';
+import { framework, runtime } from '../util.js';
 import url from '../dingtalk-url';
-
-const { framework, runtime } = env;
+import { RUNTIME, FRAMEWORK } from './constants.js';
 
 function dingtalkWebUrl(originalUrl){
   const tpl = url.parse(originalUrl,'dd_wx_tpl');

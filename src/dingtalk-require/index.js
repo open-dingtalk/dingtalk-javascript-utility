@@ -1,17 +1,15 @@
-import env from '../dingtalk-env';
-
-const { bundleFrameworkType,isWeex } = env;
+import { framework, isWeex } from '../util.js';
 
 export default function requireModule(name){
   if (isWeex){
-    if (bundleFrameworkType === 'Vue'){
+    if (framework === 'Vue'){
       return weex.requireModule(name);
     } else {
       let moduleName = '@weex-module/' + name;
       return __weex_require__(moduleName);
     }
   } else {
-    if (bundleFrameworkType === 'Vue'){
+    if (framework === 'Vue'){
       return weex.requireModule(name);
     }
   }

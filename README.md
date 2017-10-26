@@ -5,6 +5,12 @@
 
 # UMD
 
+引用 `https://g.alicdn.com/dingding/dingtalk-javascript-utility/0.2.7/index.js`
+
+```HTML
+<script src="https://g.alicdn.com/dingding/dingtalk-javascript-utility/0.2.7/index.js"> </script>
+```
+
 ```JavaScript
 var DTUtility = window.DTUtility;
 ```
@@ -31,17 +37,19 @@ import { env } from 'dingtalk-javascript-utility';
 
 # env（Object）
 
-* bundleFrameworkType （渲染框架标识 Vue or Rax）
-* isMobileDingtalk 是否在钉钉客户端中
-* isWeb 是否为Web环境
-* isWebAndroid 是否为Web环境中的Android设备
-* isWebiOS 是否为Web环境中的iOS设备
-* isWeex 是否为Weex环境
-* isWeexAndroid 是否为Weex环境中的Android设备
-* isWeexiOS 是否为Weex环境中的iOS设备
-* originalUrl 用户配置的originalUrl
-* version 钉钉客户端版本号
-* platform 输出环境标识符
+* isDingTalk, // 是否在钉钉的容器中（包含移动端和PC端）
+* isWebiOS, //是否为Web iOS
+* isWebAndroid, //是否为Web Android
+* isWeexiOS, // 是否为Weex iOS
+* isWeexAndroid, // 是否为Weex Android
+* isDingTalkPCMac, // 是否为Mac客户端中
+* isDingTalkPCWeb, // 是否在PC Web网页中
+* isDingTalkPCWindows, // 是否在PC Windows客户端中
+* isDingTalkPC, // 是否为PC
+* runtime,  // 字符串【'Web','Weex','Unknown'】
+* framework, // 字符串【'Vue','Rax','Unknown'】
+* platform, // 字符串【'Mac','Windows','iOS','Android','iPad','Browser','Unknown'】
+* version // 客户端版本
 
 ```JavaScript
 import DTUtility from 'dingtalk-javascript-utility';
