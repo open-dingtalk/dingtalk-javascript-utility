@@ -37,6 +37,8 @@ import { env } from 'dingtalk-javascript-utility';
 
 # env（Object）
 
+（Universal）
+
 * isDingTalk, // 是否在钉钉的容器中（包含移动端和PC端）
 * isWebiOS, //是否为Web iOS
 * isWebAndroid, //是否为Web Android
@@ -59,6 +61,8 @@ console.log(env)
 ```
 
 # querystring（Object）
+
+（Universal）
 
 * parse 解析传统的search参数
 
@@ -90,6 +94,8 @@ console.log(result)
 > Note 这两个方法都支持自定义 sep 和 eq
 
 # url（Object）
+
+（Universal）
 
 * parse 解析URL中的search参数
 
@@ -124,7 +130,7 @@ const result = url.format('https://github.com/icepy', {name:'icepy',job:'develop
 
 # requireModule（Function）
 
-载入一个客户端module，支持Web，Weex
+载入一个客户端module（仅支持Weex以及Weex版本移动端Web）
 
 ```JavaScript
 import DTUtility from 'dingtalk-javascript-utility';
@@ -135,6 +141,8 @@ requireModule('modal')
 ```
 
 # timer（Object）
+
+（Universal）
 
 * setTimeout 设置一个数值，延迟多少毫秒执行，且执行一次
 * clearTimeout 可以将setTimeout函数clear
@@ -157,7 +165,7 @@ const two = timer.setInterval(function(){
 
 # document （Object）
 
-支持Weex Native DOM API 和 Web document API
+支持Weex Native DOM API 和 Web document API（Universal）
 
 ```JavaScript
 import DTUtility from 'dingtalk-javascript-utility';
@@ -170,7 +178,7 @@ console.log(document)
 
 # compareVersion（Function）
 
-钉钉客户端版本对比的处理函数
+钉钉客户端版本对比的处理函数（Universal）
 
 ```JavaScript
 import DTUtility from 'dingtalk-javascript-utility';
@@ -184,7 +192,7 @@ compareVersion('3.4.10','3.4') // false
 
 # log（Object）
 
-日志等级系统
+日志等级系统（Universal）
 
 ```JavaScript
 import DTUtility from 'dingtalk-javascript-utility'
@@ -199,7 +207,7 @@ log(['warning ...'],LogType.WARNING)
 
 # config（Object）
 
-日志等级系统
+配置对象（移动Web，Weex）
 
 ```JavaScript
 import DTUtility from 'dingtalk-javascript-utility'
