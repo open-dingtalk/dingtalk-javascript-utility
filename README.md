@@ -207,7 +207,7 @@ log(['warning ...'],LogType.WARNING)
 
 # config（Object）
 
-配置对象（移动Web，Weex）
+配置对象（Universal）
 
 ```JavaScript
 import DTUtility from 'dingtalk-javascript-utility'
