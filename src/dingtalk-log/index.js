@@ -10,15 +10,15 @@ const LogType = {
   ERROR
 }
 
-function fillZore(str) {
+function fillZero(str) {
     const res = '00' + str;
     return res.substring(res.length - 2);
 }
 
 let logChannel = (logData) => {
-  const time = fillZore(logData.time.getHours())
-      + ':' + fillZore(logData.time.getMinutes())
-      + ':' + fillZore(logData.time.getSeconds());
+  const time = fillZero(logData.time.getHours())
+      + ':' + fillZero(logData.time.getMinutes())
+      + ':' + fillZero(logData.time.getSeconds());
   switch (logData.type) {
     case LogType.LOG:
         console.log('time:'+ time +' | log: ', ...logData.logArr);
